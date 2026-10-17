@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: kavach-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    autoDeploy: true

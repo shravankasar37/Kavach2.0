@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ScamShield UI styles</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;800&family=Nunito:wght@600;800;900&family=Space+Grotesk:wght@500;700&family=Orbitron:wght@800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Inter, system-ui, sans-serif; background: #f4f4f1; color: #1b1b1f; padding: 32px 16px; }
+  h1 { font: 800 28px/1.2 Inter, sans-serif; text-align: center; }
+  .lead { text-align: center; color: #5b5b66; margin: 8px auto 28px; max-width: 760px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 28px; max-width: 1180px; margin: 0 auto; }
+  .tile { display: flex; flex-direction: column; gap: 12px; }
+  .tile h2 { font: 800 18px Inter, sans-serif; display: flex; gap: 10px; align-items: center; }
+  .tag { font: 600 11px Inter, sans-serif; padding: 3px 8px; border-radius: 99px; background: #e6e6e1; color: #444; }
+  .tag.rec { background: #1b1b1f; color: #fff; }
+  .stage { border-radius: 18px; padding: 26px; min-height: 330px; display: flex; align-items: center; justify-content: center; }
+  .notes { font-size: 13.5px; color: #4b4b55; line-height: 1.55; }
+  .notes b { color: #1b1b1f; }
+  .score { font: 600 12px Inter, sans-serif; color: #5b5b66; }
+  .bar { height: 6px; background: #e3e3de; border-radius: 9px; overflow: hidden; margin-top: 4px; }
+  .bar i { display: block; height: 100%; background: #1b1b1f; }
+  .card { width: 100%; max-width: 300px; }
+  .lbl { font-size: 12px; margin-bottom: 8px; display: block; }
+  .msg { font-size: 13px; padding: 12px; line-height: 1.45; margin-bottom: 14px; }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .risk { font-size: 30px; line-height: 1; }
+  .btn { display: block; width: 100%; text-align: center; padding: 12px; font-size: 14px; border: 0; cursor: pointer; }
+
+  /* 1 neumorphism */
+  .neu .stage { background: #e4e9f0; }
+  .neu .card { background: #e4e9f0; border-radius: 22px; padding: 20px; box-shadow: 9px 9px 18px #c2c8d1, -9px -9px 18px #ffffff; color: #48526a; }
+  .neu .msg { border-radius: 14px; box-shadow: inset 5px 5px 10px #c2c8d1, inset -5px -5px 10px #ffffff; }
+  .neu .risk { font-weight: 800; color: #e0505b; }
+  .neu .pill { padding: 6px 12px; border-radius: 99px; box-shadow: 4px 4px 8px #c2c8d1, -4px -4px 8px #fff; font-size: 12px; font-weight: 600; }
+  .neu .btn { border-radius: 14px; background: #e4e9f0; color: #48526a; font-weight: 700; box-shadow: 6px 6px 12px #c2c8d1, -6px -6px 12px #fff; }
+
+  /* 2 neo-brutalism */
+  .bru .stage { background: #fff6d9; }
+  .bru .card { background: #fff; border: 3px solid #111; box-shadow: 8px 8px 0 #111; padding: 18px; font-family: 'Space Grotesk', sans-serif; }
+  .bru .lbl { font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .bru .msg { border: 3px solid #111; background: #c9f2ff; }
+  .bru .risk { font-family: 'Archivo Black', sans-serif; font-size: 34px; }
+  .bru .pill { background: #ff5c5c; border: 3px solid #111; padding: 4px 10px; font-weight: 700; box-shadow: 3px 3px 0 #111; }
+  .bru .btn { background: #b6f36a; border: 3px solid #111; box-shadow: 5px 5px 0 #111; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; }
+
+  /* 3 flat 2.0 */
+  .flat .stage { background: #ffffff; border: 1px solid #ececec; }
+  .flat .card { background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 1px 3px rgba(16,24,40,.08); border: 1px solid #eef0f3; }
+  .flat .lbl { color: #667085; font-weight: 600; }
+  .flat .msg { background: #f2f4f7; border-radius: 8px; color: #344054; }
+  .flat .risk { font-weight: 800; color: #d92d20; }
+  .flat .pill { background: #fee4e2; color: #b42318; padding: 4px 10px; border-radius: 99px; font-size: 12px; font-weight: 600; }
+  .flat .btn { background: #2e6be6; color: #fff; border-radius: 8px; font-weight: 600; }
+
+  /* 4 claymorphism */
+  .clay .stage { background: #f6e9ff; }
+  .clay .card { background: #fff; border-radius: 34px; padding: 22px; font-family: Nunito, sans-serif; box-shadow: 0 18px 30px rgba(140, 90, 200, .25), inset 0 -8px 14px rgba(140, 90, 200, .18), inset 0 6px 10px #fff; }
+  .clay .lbl { font-weight: 800; color: #7a4fb8; }
+  .clay .msg { background: #fff3d6; border-radius: 22px; box-shadow: inset 0 -5px 10px rgba(200, 150, 40, .2); }
+  .clay .risk { font-weight: 900; color: #ff5d73; }
+  .clay .pill { background: #ffd1d8; color: #b0213a; padding: 6px 12px; border-radius: 99px; font-weight: 800; font-size: 12px; box-shadow: inset 0 -3px 6px rgba(176,33,58,.2); }
+  .clay .btn { background: #8b5cf6; color: #fff; border-radius: 22px; font-weight: 900; font-size: 15px; box-shadow: 0 10px 18px rgba(139,92,246,.4), inset 0 -6px 10px rgba(0,0,0,.18), inset 0 5px 8px rgba(255,255,255,.35); }
+
+  /* 5 glassmorphism */
+  .glass .stage { background: radial-gradient(circle at 20% 20%, #ff8fab, transparent 45%), radial-gradient(circle at 80% 70%, #6ea8ff, transparent 45%), #241b4a; }
+  .glass .card { background: rgba(255,255,255,.14); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.35); border-radius: 20px; padding: 20px; color: #fff; }
+  .glass .lbl { opacity: .85; }
+  .glass .msg { background: rgba(255,255,255,.12); border-radius: 12px; }
+  .glass .risk { font-weight: 800; }
+  .glass .pill { background: rgba(255, 80, 100, .35); border: 1px solid rgba(255,255,255,.4); padding: 4px 10px; border-radius: 99px; font-size: 12px; }
+  .glass .btn { background: rgba(255,255,255,.9); color: #241b4a; border-radius: 12px; font-weight: 700; }
+
+  /* 6 cyber HUD (VaaniShield / NyayaSathi) */
+  .hud .stage { background: #05060a; border-radius: 0; }
+  .hud .card { background: #090b10; border: 1.5px solid #1e2235; border-left: 3px solid #ff1a40; box-shadow: 3px 3px 0 #ff1a40; padding: 18px; color: #e8eaf0; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px)); font-family: 'Share Tech Mono', monospace; }
+  .hud .lbl { color: #7d89a8; letter-spacing: .08em; }
+  .hud .msg { border: 1.5px solid #1e2235; background: #0c0e16; }
+  .hud .risk { font-family: Orbitron, sans-serif; color: #ff1a40; text-shadow: -2px 0 #00e5ff, 2px 0 #ff1a40; }
+  .hud .pill { border: 1.5px solid #00e5ff; color: #00e5ff; padding: 3px 8px; font-size: 12px; }
+  .hud .btn { background: #00e575; color: #04130b; font-family: Orbitron, sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .1em; }
+
+  .verdict { margin-top: 36px; max-width: 1180px; margin-left: auto; margin-right: auto; background: #1b1b1f; color: #fff; border-radius: 18px; padding: 22px 24px; }
+  .verdict h3 { font: 800 18px Inter, sans-serif; margin-bottom: 8px; }
+  .verdict p { color: #d7d7dd; line-height: 1.6; font-size: 14.5px; }
+</style>
+</head>
+<body>
+<h1>ScamShield: one screen, six design styles</h1>
+<p class="lead">The same "check a suspicious message" card drawn in each style, with how well it suits a scam checker used by everyday citizens and how it adds to your portfolio.</p>
+
+<div class="grid">
+  <script>
+    const msg = "Dear customer, your SBI KYC expires today. Update now or your account will be blocked: sbi-kyc-update.in/verify";
+    const styles = [
+      { cls: "neu", name: "Neumorphism", tag: "Soft UI", fit: 45, note: "<b>Looks:</b> calm, premium, soft extruded shapes. <b>But:</b> low contrast makes the danger state weak, and it's hard to read for elderly users. Already used in TRINETRA and ARIA." },
+      { cls: "bru", name: "Neo-brutalism", tag: "Recommended", rec: true, fit: 92, note: "<b>Looks:</b> bold, loud, thick borders and hard shadows; a warning screams like a warning. <b>Why it wins:</b> highest contrast and readability for every age, very trendy in 2025–26 product design, and a style none of your projects use yet." },
+      { cls: "flat", name: "Flat design 2.0", tag: "Product SaaS", fit: 78, note: "<b>Looks:</b> clean, trustworthy, like a bank or government app. <b>But:</b> safe and familiar, so it is less memorable in a portfolio, though very practical." },
+      { cls: "clay", name: "Claymorphism", tag: "Friendly", fit: 70, note: "<b>Looks:</b> puffy, playful 3D blobs; friendly and approachable. <b>But:</b> the cheerful feel softens the urgency of a scam alert, and the heavy shadows cost performance on cheap phones." },
+      { cls: "glass", name: "Glassmorphism", tag: "Bonus", fit: 52, note: "<b>Looks:</b> frosted glass over colour blobs; flashy for a landing page. <b>But:</b> text over blurry backgrounds hurts readability, and blur is slow on low-end Android." },
+      { cls: "hud", name: "Cyber HUD", tag: "Your current style", fit: 60, note: "<b>Looks:</b> hacker or forensic console, matching VaaniShield and NyayaSathi. <b>But:</b> a third project in the same style makes your portfolio look one-note, and mono uppercase text is tiring for long reading." },
+    ];
+    for (const s of styles) {
+      document.write(`
+      <div class="tile ${s.cls}">
+        <h2>${s.name} <span class="tag ${s.rec ? "rec" : ""}">${s.tag}</span></h2>
+        <div class="stage">
+          <div class="card">
+            <span class="lbl">Suspicious message</span>
+            <div class="msg">${msg}</div>
+            <div class="row"><span class="risk">92%</span><span class="pill">High risk: fake KYC</span></div>
+            <button class="btn">Check another message</button>
+          </div>
+        </div>
+        <div class="score">Fit for ScamShield: ${s.fit}/100</div>
+        <div class="bar"><i style="width:${s.fit}%"></i></div>
+        <p class="notes">${s.note}</p>
+      </div>`);
+    }
+  </script>
+</div>
+
+<div class="verdict">
+  <h3>Recommendation: neo-brutalism for ScamShield</h3>
+  <p>A scam checker has one job: make danger unmissable for anyone, including parents and grandparents on a cheap phone. Neo-brutalism's thick borders, flat bright colours and hard shadows give the strongest contrast, read well in Hindi and Marathi, cost nothing in performance, and give your portfolio a visibly different third style next to TRINETRA (neumorphic) and VaaniShield/NyayaSathi (cyber HUD).</p>
+</div>
+</body>
+</html>

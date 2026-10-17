@@ -1,0 +1,14 @@
+node_modules/
+.next/
+.venv/
+__pycache__/
+.env*
+!.env.example
+.vercel/
+# raw downloads (large / third-party); prepared splits are in data/prepared
+data/raw/
+backend/app/model/
+training/results/
+
+# raw scraper output (contains article text); only the curated quotes are published
+data/real/candidates*.jsonl

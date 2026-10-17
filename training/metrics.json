@@ -1,0 +1,133 @@
+{
+  "base": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "epochs": 5,
+  "history": [
+    {
+      "epoch": 1,
+      "val": {
+        "n": 645,
+        "scam": 182,
+        "precision": 0.9529,
+        "recall": 0.8901,
+        "f1": 0.9205,
+        "roc_auc": 0.9886,
+        "pr_auc": 0.9791,
+        "false_positive_rate": 0.0173
+      }
+    },
+    {
+      "epoch": 2,
+      "val": {
+        "n": 645,
+        "scam": 182,
+        "precision": 0.9263,
+        "recall": 0.967,
+        "f1": 0.9462,
+        "roc_auc": 0.9939,
+        "pr_auc": 0.9885,
+        "false_positive_rate": 0.0302
+      }
+    },
+    {
+      "epoch": 3,
+      "val": {
+        "n": 645,
+        "scam": 182,
+        "precision": 0.9719,
+        "recall": 0.9505,
+        "f1": 0.9611,
+        "roc_auc": 0.9942,
+        "pr_auc": 0.9905,
+        "false_positive_rate": 0.0108
+      }
+    },
+    {
+      "epoch": 4,
+      "val": {
+        "n": 645,
+        "scam": 182,
+        "precision": 0.9773,
+        "recall": 0.9451,
+        "f1": 0.9609,
+        "roc_auc": 0.9931,
+        "pr_auc": 0.9895,
+        "false_positive_rate": 0.0086
+      }
+    },
+    {
+      "epoch": 5,
+      "val": {
+        "n": 645,
+        "scam": 182,
+        "precision": 0.9718,
+        "recall": 0.9451,
+        "f1": 0.9582,
+        "roc_auc": 0.9934,
+        "pr_auc": 0.9901,
+        "false_positive_rate": 0.0108
+      }
+    }
+  ],
+  "threshold": 0.35,
+  "test_real_fp32": {
+    "n": 1031,
+    "scam": 128,
+    "precision": 0.992,
+    "recall": 0.9688,
+    "f1": 0.9802,
+    "roc_auc": 0.9995,
+    "pr_auc": 0.9968,
+    "false_positive_rate": 0.0011
+  },
+  "test_real_int8": {
+    "n": 1031,
+    "scam": 128,
+    "precision": 0.992,
+    "recall": 0.9688,
+    "f1": 0.9802,
+    "roc_auc": 0.9996,
+    "pr_auc": 0.9972,
+    "false_positive_rate": 0.0011
+  },
+  "int8_size_mb": 407.1,
+  "india_in_the_wild": [
+    {
+      "type": "electricity_disconnection",
+      "p_scam": 0.9725,
+      "flagged": true,
+      "text": "Dear Customer Your Power will be disconnected tonight at 9:30 pm from electricity office."
+    },
+    {
+      "type": "electricity_disconnection",
+      "p_scam": 0.9939,
+      "flagged": true,
+      "text": "Dear Consumer Your Electricity power will be disconnected. Tonight at 9.30 pm from electri"
+    },
+    {
+      "type": "electricity_disconnection",
+      "p_scam": 0.9961,
+      "flagged": true,
+      "text": "Dear customer Your Electricity power will be disconnected. Tonight at 9.30 pm from electri"
+    },
+    {
+      "type": "job_offer",
+      "p_scam": 0.9967,
+      "flagged": true,
+      "text": "Spend a few minutes every day. You can earn 30,000 per month. Let us unite and beat the ne"
+    },
+    {
+      "type": "courier_address",
+      "p_scam": 0.9955,
+      "flagged": true,
+      "text": "India Post: Your package has arrived at the warehouse and we attempted delivery twice but "
+    }
+  ],
+  "test_real_int8_gather": {
+    "size_mb": 118.5,
+    "precision": 0.992,
+    "recall": 0.9688,
+    "f1": 0.9802,
+    "roc_auc": 0.9994,
+    "false_positive_rate": 0.0011
+  }
+}

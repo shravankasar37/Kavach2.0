@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* Kavach: flat 2.0, trust-first. White surfaces, navy ink, one action blue; red / amber / green carry risk only. */
+:root {
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --ink: #0f1b33;
+  --muted: #5a6478;
+  --line: #e3e8f0;
+  --blue: #1f5eff;
+  --blue-soft: #e8efff;
+  --red: #c81e1e;
+  --red-soft: #fdecec;
+  --amber: #b45309;
+  --amber-soft: #fff4e0;
+  --green: #0f7a45;
+  --green-soft: #e6f6ee;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1220;
+    --surface: #151c2e;
+    --ink: #e8edf7;
+    --muted: #9aa5bb;
+    --line: #26304a;
+    --blue: #6b93ff;
+    --blue-soft: #1b2850;
+    --red: #ff7b7b;
+    --red-soft: #3a1717;
+    --amber: #ffb547;
+    --amber-soft: #3a2a10;
+    --green: #4fd38c;
+    --green-soft: #12301f;
+  }
+}
+html { background: var(--bg); color: var(--ink); }
+body { font-family: var(--font-inter), var(--font-deva), system-ui, sans-serif; font-size: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+.btn-primary { background: var(--blue); color: #fff; border-radius: 12px; font-weight: 600; padding: 0.8rem 1.25rem; }
+.btn-primary:disabled { opacity: 0.5; }
+.btn-ghost { border: 1px solid var(--line); border-radius: 12px; padding: 0.55rem 0.9rem; font-weight: 500; background: var(--surface); }
+.chip { border: 1px solid var(--line); border-radius: 999px; padding: 0.35rem 0.8rem; font-size: 0.85rem; background: var(--surface); }
+.field { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 0.85rem 1rem; background: var(--surface); color: var(--ink); }
+.field:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
