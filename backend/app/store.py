@@ -122,7 +122,10 @@ def _db() -> sqlite3.Connection:
 
 # ---------- Supabase (production) ----------
 def _sb(method: str, path: str, body: object | None = None, prefer: str | None = None):
-    headers = {"apikey": SB_KEY, "Authorization": f"Bearer {SB_KEY}", "Content-Type": "application/json"}
+    headers = {"apikey": SB_KEY, "Content-Type": "application/json"}
+    # legacy service_role keys are JWTs and also go in Authorization; new sb_secret_ keys go only in apikey
+    if not SB_KEY.startswith("sb_"):
+        headers["Authorization"] = f"Bearer {SB_KEY}"
     if prefer:
         headers["Prefer"] = prefer
     req = urllib.request.Request(f"{SB_URL}/rest/v1/{path}", method=method, headers=headers,
