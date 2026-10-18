@@ -50,8 +50,15 @@ _recent: dict[str, deque] = defaultdict(deque)
 
 
 def _client_ip(req: Request) -> str:
-    fwd = req.headers.get("x-forwarded-for", "")
-    return fwd.split(",")[0].strip() if fwd else (req.client.host if req.client else "unknown")
+    """The caller's real IP, as set by the proxies in front of the app. Anything the client writes itself is
+    ignored: otherwise one person could pose as "3 different reporters" and blacklist someone else's number."""
+    # Render sits behind Cloudflare, which sets this header and overwrites any copy the client sends
+    if cf := req.headers.get("cf-connecting-ip"):
+        return cf.strip()
+    # proxies append the address they saw, so the client-controlled part is on the left
+    if fwd := req.headers.get("x-forwarded-for"):
+        return fwd.split(",")[-1].strip()
+    return req.client.host if req.client else "unknown"
 
 
 def _rate_ok(ip: str, limit: int = 10, per: float = 3600) -> bool:
