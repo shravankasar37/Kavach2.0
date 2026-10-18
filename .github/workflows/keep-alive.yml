@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Ping the Kavach API
         env:
-          API_URL: ${{ vars.KAVACH_API_URL || 'https://kavach-api.onrender.com' }}
+          API_URL: ${{ vars.KAVACH_API_URL || 'https://kavach-api-rkw2.onrender.com' }}
         run: |
           for i in 1 2 3; do
             if curl -fsS -m 90 "$API_URL/health"; then echo; exit 0; fi

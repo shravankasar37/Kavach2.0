@@ -3,7 +3,7 @@
 > *Kavach* = armour. Paste a suspicious SMS or WhatsApp message (English, हिंदी, मराठी, Hinglish) and Kavach
 > tells you if it's a scam, **why**, and, if you've already lost money, **exactly what to do in the next hour**.
 
-**Live demo:** {{WEB_URL}} · **API:** {{API_URL}}/docs · **Model:** [huggingface.co/shravan37/kavach-scam-classifier](https://huggingface.co/shravan37/kavach-scam-classifier) · Built by [Shravan Kasar](https://github.com/shravankasar37)
+**Live demo:** https://kavach-2-0.vercel.app · **API:** https://kavach-api-rkw2.onrender.com/docs · **Model:** [huggingface.co/shravan37/kavach-scam-classifier](https://huggingface.co/shravan37/kavach-scam-classifier) · Built by [Shravan Kasar](https://github.com/shravankasar37)
 
 Part of an AI-safety suite: call recordings are checked by **[VaaniShield](https://github.com/shravankasar37/VaaniShield2.0)**
 (voice-clone detection) and FIR complaints are drafted by **[NyayaSathi](https://github.com/shravankasar37/-NyayaSathi)**

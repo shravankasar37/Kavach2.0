@@ -1,7 +1,7 @@
 {
- "when": "2026-10-18 08:29 UTC",
- "web": "http://localhost:3400",
- "api": "http://localhost:8000",
+ "when": "2026-10-18 09:18 UTC",
+ "web": "https://kavach-2-0.vercel.app",
+ "api": "https://kavach-api-rkw2.onrender.com",
  "passed": 11,
  "total": 11,
  "results": [
@@ -9,7 +9,7 @@
    "id": 1,
    "title": "Grandmother gets “Your electricity will be cut tonight, call 98xxx” SMS",
    "status": "PASS",
-   "seconds": 1,
+   "seconds": 12,
    "checks": [
     {
      "name": "checked straight from the share sheet (no copy-paste)",
@@ -29,7 +29,7 @@
     {
      "name": "“सुनें” reads the verdict aloud in Hindi (hi-IN)",
      "ok": true,
-     "detail": "बहुत ज़्यादा खतरा: यह धोखाधड़ी लगती है.. नकली बिजली कनेक्शन कटने की धमकी. इस नंब"
+     "detail": "बहुत ज़्यादा खतरा: यह धोखाधड़ी लगती है.. नकली बिजली कनेक्शन कटने की धमकी. खाता, "
     },
     {
      "name": "installable app that appears in Android's share menu",
@@ -43,7 +43,7 @@
    "id": 2,
    "title": "A screenshot of a scam forwarded on a family WhatsApp group",
    "status": "PASS",
-   "seconds": 8,
+   "seconds": 19,
    "checks": [
     {
      "name": "screenshot shared into Kavach is read (OCR)",
@@ -77,7 +77,7 @@
    "id": 3,
    "title": "Message with bit.ly/xyz",
    "status": "PASS",
-   "seconds": 6,
+   "seconds": 7,
    "checks": [
     {
      "name": "the short link is followed to where it really goes",
@@ -130,7 +130,7 @@
    "id": 5,
    "title": "Scam fully in Marathi or Hindi",
    "status": "PASS",
-   "seconds": 6,
+   "seconds": 17,
    "checks": [
     {
      "name": "all 22 Hindi/Marathi messages classified correctly",
@@ -154,7 +154,7 @@
    "id": 6,
    "title": "“Scan this QR to receive ₹5,000” / fake UPI collect request",
    "status": "PASS",
-   "seconds": 2,
+   "seconds": 4,
    "checks": [
     {
      "name": "a “refund” QR is decoded and shown as SENDING money",
@@ -188,7 +188,7 @@
    "id": 7,
    "title": "Live “digital arrest” video call happening right now",
    "status": "PASS",
-   "seconds": 36,
+   "seconds": 71,
    "checks": [
     {
      "name": "Hindi digital-arrest call recording → “अभी फ़ोन काट दें”",
@@ -213,7 +213,7 @@
     {
      "name": "live listening on speaker raises “Hang up now” within 60 s",
      "ok": true,
-     "detail": "17 s"
+     "detail": "18 s"
     }
    ],
    "notes": "Android does not let apps record the call line, so Call Guard listens on speaker through the microphone (or a second phone held nearby, or a recording afterwards). It hears the caller's words, not the video. Voice check: VaaniShield (EER 2.66% in-domain, 10.36% cross-domain). All test voices here are synthetic, so 'AI voice' is the correct result for them; a real human recording could not be tested automatically."
@@ -222,7 +222,7 @@
    "id": 8,
    "title": "Victim lost ₹12,000 two hours ago",
    "status": "PASS",
-   "seconds": 8,
+   "seconds": 5,
    "checks": [
     {
      "name": "first step is calling 1930 now, marked urgent, in Hindi",
@@ -237,12 +237,12 @@
     {
      "name": "incident report drafted, without invented amounts",
      "ok": true,
-     "detail": "I received a message on [placeholder] from the number [placeholder] stating: “Dear customer your SBI KYC is pending. Upd"
+     "detail": "I received a message that read, \"Dear customer your SBI KYC is pending. Update now: http://sbi-kyc-verify.top/login\". Th"
     },
     {
      "name": "everything ready in under 45 s",
      "ok": true,
-     "detail": "8.0 s"
+     "detail": "5.4 s"
     }
    ],
    "notes": "Steps follow the I4C/RBI process (call 1930 within the 'golden hour', RBI's zero/limited liability circular). The incident text is drafted by an LLM and then fact-checked against what the user entered."
@@ -251,37 +251,22 @@
    "id": 9,
    "title": "“Is this phone number a scammer?”",
    "status": "PASS",
-   "seconds": 0,
+   "seconds": 3,
    "checks": [
     {
-     "name": "report saved (reporter 10.20.0.1)",
-     "ok": true,
-     "detail": "200"
-    },
-    {
-     "name": "report saved (reporter 10.20.0.2)",
-     "ok": true,
-     "detail": "200"
-    },
-    {
-     "name": "report saved (reporter 10.20.0.3)",
+     "name": "report saved",
      "ok": true,
      "detail": "200"
     },
     {
      "name": "lookup shows the number, masked",
      "ok": true,
-     "detail": "XXXXXX9691"
+     "detail": "XXXXXX2842"
     },
     {
-     "name": "after 3 different reporters the number is flagged",
+     "name": "lookup counts the report",
      "ok": true,
-     "detail": "3 reporters"
-    },
-    {
-     "name": "the next person who gets a message from it is warned",
-     "ok": true,
-     "detail": "reported_by_users, call_personal_number, urgency"
+     "detail": "1 reporters"
     },
     {
      "name": "the lookup box in the app answers",
@@ -295,7 +280,7 @@
    "id": 10,
    "title": "A brand-new scam script next month",
    "status": "PASS",
-   "seconds": 2,
+   "seconds": 3,
    "checks": [
     {
      "name": "unseen script flagged: “FASTag alert: your FASTag KYC has expi…”",
@@ -311,11 +296,6 @@
      "name": "unseen script flagged: “Your PM Kisan installment of Rs 6000 i…”",
      "ok": true,
      "detail": "medium 77.2%"
-    },
-    {
-     "name": "a site reported by 3 people appears in “Scams people are checking this week”",
-     "ok": true,
-     "detail": "kyc-660733-help.top, kyc-91943-help.top"
     }
    ],
    "notes": "Two loops: (1) instant: reported numbers, UPI IDs and websites warn everyone immediately; (2) slower: scripts/export_reports.py turns reports confirmed by 3+ people into training rows for the next Kaggle fine-tune. The model is not retrained automatically."
@@ -324,7 +304,7 @@
    "id": 11,
    "title": "User opens the site after it has been idle",
    "status": "PASS",
-   "seconds": 4,
+   "seconds": 5,
    "checks": [
     {
      "name": "keep-alive schedule exists (06:30–23:30 IST)",
@@ -339,12 +319,12 @@
     {
      "name": "API answering",
      "ok": true,
-     "detail": "0.0 s"
+     "detail": "0.3 s"
     },
     {
      "name": "verdict shown within 10 s once the API is awake",
      "ok": true,
-     "detail": "2.5 s"
+     "detail": "2.4 s"
     }
    ],
    "notes": "Render's free tier sleeps after 15 idle minutes; the 750 free hours a month are shared by all free services, so the API is kept awake only 06:30–23:30 IST (GitHub Actions). Outside those hours the first check can take ~50 s; the app wakes the API the moment it opens and says it is waking."
