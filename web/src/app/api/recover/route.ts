@@ -11,6 +11,7 @@ const Body = z.object({
   message: z.string().max(3000).default(""),
   story: z.string().max(3000).default(""),
   category: z.string().nullable().optional(),
+  lang: z.enum(["en", "hi", "mr"]).default("en"),
   facts: z.object({
     lostMoney: z.boolean(),
     amount: z.number().nullable().optional(),
@@ -31,9 +32,9 @@ const FactCheck = z.object({ issues: z.array(z.string()).describe("statements in
 export async function POST(req: Request) {
   const parsed = Body.safeParse(await req.json());
   if (!parsed.success) return Response.json({ error: "Invalid request" }, { status: 400 });
-  const { message, story, category, facts } = parsed.data;
+  const { message, story, category, facts, lang } = parsed.data;
   const f = facts as Facts;
-  const steps = recoveryPlan(f);
+  const steps = recoveryPlan(f, lang);
   const letter = f.lostMoney ? bankLetter(f) : null;
 
   let narrative: z.infer<typeof Narrative> | null = null;

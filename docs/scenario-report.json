@@ -1,0 +1,353 @@
+{
+ "when": "2026-10-18 08:29 UTC",
+ "web": "http://localhost:3400",
+ "api": "http://localhost:8000",
+ "passed": 11,
+ "total": 11,
+ "results": [
+  {
+   "id": 1,
+   "title": "Grandmother gets “Your electricity will be cut tonight, call 98xxx” SMS",
+   "status": "PASS",
+   "seconds": 1,
+   "checks": [
+    {
+     "name": "checked straight from the share sheet (no copy-paste)",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "name": "verdict is high risk, in Hindi",
+     "ok": true,
+     "detail": "100% | बहुत ज़्यादा खतरा: यह धोखाधड़ी लगती है"
+    },
+    {
+     "name": "names the scam type in Hindi",
+     "ok": true,
+     "detail": "नकली बिजली कनेक्शन कटने की धमकी · लिंक न खोलें, वापस कॉल न करें, पैसे न भेजें और कोई OTP न बताएँ।"
+    },
+    {
+     "name": "“सुनें” reads the verdict aloud in Hindi (hi-IN)",
+     "ok": true,
+     "detail": "बहुत ज़्यादा खतरा: यह धोखाधड़ी लगती है.. नकली बिजली कनेक्शन कटने की धमकी. इस नंब"
+    },
+    {
+     "name": "installable app that appears in Android's share menu",
+     "ok": true,
+     "detail": ""
+    }
+   ],
+   "notes": "She doesn't need to copy-paste: long-press → Share → Kavach (installed app). The Telegram bot reply format is covered by backend/tests/test_telegram.py; a live bot needs a token from @BotFather."
+  },
+  {
+   "id": 2,
+   "title": "A screenshot of a scam forwarded on a family WhatsApp group",
+   "status": "PASS",
+   "seconds": 8,
+   "checks": [
+    {
+     "name": "screenshot shared into Kavach is read (OCR)",
+     "ok": true,
+     "detail": "आपका बिजली कनेक्शन आज रात 9:30 बजे काट\nदिया जाएगा क्योंकि पि"
+    },
+    {
+     "name": "Hindi text read with ≥ 90% character accuracy",
+     "ok": true,
+     "detail": "95.0%"
+    },
+    {
+     "name": "verdict is high risk",
+     "ok": true,
+     "detail": "बहुत ज़्यादा खतरा: यह धोखाधड़ी लगती है"
+    },
+    {
+     "name": "Marathi screenshot read with ≥ 90% character accuracy",
+     "ok": true,
+     "detail": "95.6%"
+    },
+    {
+     "name": "Marathi verdict is high risk",
+     "ok": true,
+     "detail": "खूप जास्त धोका: ही फसवणूक दिसते"
+    }
+   ],
+   "notes": "OCR runs on the phone (Tesseract, English + Hindi + Marathi); the image never leaves the device."
+  },
+  {
+   "id": 3,
+   "title": "Message with bit.ly/xyz",
+   "status": "PASS",
+   "seconds": 6,
+   "checks": [
+    {
+     "name": "the short link is followed to where it really goes",
+     "ok": true,
+     "detail": "https://bit.ly/3xyz → alideas.com"
+    },
+    {
+     "name": "the real destination's age and phishing-list status are shown",
+     "ok": true,
+     "detail": "age 2323 days, listed false"
+    },
+    {
+     "name": "the app shows “Really goes to …”",
+     "ok": true,
+     "detail": ""
+    }
+   ],
+   "notes": "Kavach reads only redirect headers; it never opens the page in a browser."
+  },
+  {
+   "id": 4,
+   "title": "A new-looking link like secure-update-portal.in (no bank name in it)",
+   "status": "PASS",
+   "seconds": 7,
+   "checks": [
+    {
+     "name": "a link on today's phishing feed is caught as “known phishing”",
+     "ok": true,
+     "detail": "http://roblox.com.et/users/7999205213/profile"
+    },
+    {
+     "name": "…and the verdict is high risk",
+     "ok": true,
+     "detail": "high 99.7%"
+    },
+    {
+     "name": "a no-brand phishing-style link is still flagged",
+     "ok": true,
+     "detail": "high 99.7% [threat_block, urgency, asks_click]"
+    },
+    {
+     "name": "the link check reports whether the site exists / how old it is",
+     "ok": true,
+     "detail": "site: unresolvable or private address"
+    }
+   ],
+   "notes": "Uses the OpenPhish and URLhaus public feeds (refreshed every 3 h) and RDAP registration dates. A site that is brand new and not yet listed anywhere can still slip through; the AI model and the other signs are the backstop."
+  },
+  {
+   "id": 5,
+   "title": "Scam fully in Marathi or Hindi",
+   "status": "PASS",
+   "seconds": 6,
+   "checks": [
+    {
+     "name": "all 22 Hindi/Marathi messages classified correctly",
+     "ok": true,
+     "detail": "22/22"
+    },
+    {
+     "name": "interface fully in Hindi",
+     "ok": true,
+     "detail": "संदिग्ध SMS, WhatsApp मैसेज या स्क्रीनशॉट जाँचें | "
+    },
+    {
+     "name": "interface fully in Marathi",
+     "ok": true,
+     "detail": "संशयास्पद SMS, WhatsApp संदेश किंवा स्क्रीनशॉट तपासा | "
+    }
+   ],
+   "notes": "The 22 test messages are written by the author from common scam patterns, not collected from real victims; real Hindi/Marathi accuracy will be measured from community reports. The model's measured accuracy is on the real English SMS test set (precision 0.992, recall 0.969)."
+  },
+  {
+   "id": 6,
+   "title": "“Scan this QR to receive ₹5,000” / fake UPI collect request",
+   "status": "PASS",
+   "seconds": 2,
+   "checks": [
+    {
+     "name": "a “refund” QR is decoded and shown as SENDING money",
+     "ok": true,
+     "detail": "⚠ Scanning this QR will SEND money, not receive it | Pays to: SBI Refund Department · 9876543210@ybl | Amount: ₹4999"
+    },
+    {
+     "name": "it warns the “SBI Refund” name hides a personal number",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "name": "a normal shop QR is explained without a scam alarm",
+     "ok": true,
+     "detail": "Scanning this QR will SEND money, not receive it | Pays to: Sharma Kirana Store · sharmakirana@okaxis"
+    },
+    {
+     "name": "“scan / enter PIN to receive money” text is high risk",
+     "ok": true,
+     "detail": "high 93.2%"
+    },
+    {
+     "name": "a genuine “never enter your PIN to receive” warning is not flagged",
+     "ok": true,
+     "detail": "low 5%"
+    }
+   ],
+   "notes": "The QR is decoded on the phone. Kavach cannot see a collect request inside the UPI app itself, only messages, screenshots and QR images shared to it."
+  },
+  {
+   "id": 7,
+   "title": "Live “digital arrest” video call happening right now",
+   "status": "PASS",
+   "seconds": 36,
+   "checks": [
+    {
+     "name": "Hindi digital-arrest call recording → “अभी फ़ोन काट दें”",
+     "ok": true,
+     "detail": "डिजिटल अरेस्ट / नकली पुलिस · लिंक न खोलें, वापस कॉल न करें, पैसे न भेजें और कोई OTP न बताएँ।"
+    },
+    {
+     "name": "voice-clone check answers (synthetic test voice → flagged as AI)",
+     "ok": true,
+     "detail": "⚠ आवाज़ AI से बनी या नकल की हुई हो सकती है (100%)"
+    },
+    {
+     "name": "Marathi digital-arrest call → “आत्ताच फोन ठेवा”",
+     "ok": true,
+     "detail": "डिजिटल अरेस्ट / नकली पोलीस · लिंक उघडू नका, परत कॉल करू नका, पैसे पाठवू नका आणि OTP सांगू नका."
+    },
+    {
+     "name": "a normal family call is not flagged",
+     "ok": true,
+     "detail": "Looks safe"
+    },
+    {
+     "name": "live listening on speaker raises “Hang up now” within 60 s",
+     "ok": true,
+     "detail": "17 s"
+    }
+   ],
+   "notes": "Android does not let apps record the call line, so Call Guard listens on speaker through the microphone (or a second phone held nearby, or a recording afterwards). It hears the caller's words, not the video. Voice check: VaaniShield (EER 2.66% in-domain, 10.36% cross-domain). All test voices here are synthetic, so 'AI voice' is the correct result for them; a real human recording could not be tested automatically."
+  },
+  {
+   "id": 8,
+   "title": "Victim lost ₹12,000 two hours ago",
+   "status": "PASS",
+   "seconds": 8,
+   "checks": [
+    {
+     "name": "first step is calling 1930 now, marked urgent, in Hindi",
+     "ok": true,
+     "detail": "अभी 1930 पर कॉल करें"
+    },
+    {
+     "name": "bank dispute letter is ready, citing the RBI circular and the amount",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "name": "incident report drafted, without invented amounts",
+     "ok": true,
+     "detail": "I received a message on [placeholder] from the number [placeholder] stating: “Dear customer your SBI KYC is pending. Upd"
+    },
+    {
+     "name": "everything ready in under 45 s",
+     "ok": true,
+     "detail": "8.0 s"
+    }
+   ],
+   "notes": "Steps follow the I4C/RBI process (call 1930 within the 'golden hour', RBI's zero/limited liability circular). The incident text is drafted by an LLM and then fact-checked against what the user entered."
+  },
+  {
+   "id": 9,
+   "title": "“Is this phone number a scammer?”",
+   "status": "PASS",
+   "seconds": 0,
+   "checks": [
+    {
+     "name": "report saved (reporter 10.20.0.1)",
+     "ok": true,
+     "detail": "200"
+    },
+    {
+     "name": "report saved (reporter 10.20.0.2)",
+     "ok": true,
+     "detail": "200"
+    },
+    {
+     "name": "report saved (reporter 10.20.0.3)",
+     "ok": true,
+     "detail": "200"
+    },
+    {
+     "name": "lookup shows the number, masked",
+     "ok": true,
+     "detail": "XXXXXX9691"
+    },
+    {
+     "name": "after 3 different reporters the number is flagged",
+     "ok": true,
+     "detail": "3 reporters"
+    },
+    {
+     "name": "the next person who gets a message from it is warned",
+     "ok": true,
+     "detail": "reported_by_users, call_personal_number, urgency"
+    },
+    {
+     "name": "the lookup box in the app answers",
+     "ok": true,
+     "detail": ""
+    }
+   ],
+   "notes": "A number counts as reported only after 3 different people report it, so one person cannot blacklist someone else; numbers are stored only as salted hashes. On the deployed app, distinct reporters can't be simulated, so the 3-reporter step runs only locally."
+  },
+  {
+   "id": 10,
+   "title": "A brand-new scam script next month",
+   "status": "PASS",
+   "seconds": 2,
+   "checks": [
+    {
+     "name": "unseen script flagged: “FASTag alert: your FASTag KYC has expi…”",
+     "ok": true,
+     "detail": "high 99.6%"
+    },
+    {
+     "name": "unseen script flagged: “TRAI notice: your mobile number will b…”",
+     "ok": true,
+     "detail": "high 99.7%"
+    },
+    {
+     "name": "unseen script flagged: “Your PM Kisan installment of Rs 6000 i…”",
+     "ok": true,
+     "detail": "medium 77.2%"
+    },
+    {
+     "name": "a site reported by 3 people appears in “Scams people are checking this week”",
+     "ok": true,
+     "detail": "kyc-660733-help.top, kyc-91943-help.top"
+    }
+   ],
+   "notes": "Two loops: (1) instant: reported numbers, UPI IDs and websites warn everyone immediately; (2) slower: scripts/export_reports.py turns reports confirmed by 3+ people into training rows for the next Kaggle fine-tune. The model is not retrained automatically."
+  },
+  {
+   "id": 11,
+   "title": "User opens the site after it has been idle",
+   "status": "PASS",
+   "seconds": 4,
+   "checks": [
+    {
+     "name": "keep-alive schedule exists (06:30–23:30 IST)",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "name": "opening the app immediately wakes the API",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "name": "API answering",
+     "ok": true,
+     "detail": "0.0 s"
+    },
+    {
+     "name": "verdict shown within 10 s once the API is awake",
+     "ok": true,
+     "detail": "2.5 s"
+    }
+   ],
+   "notes": "Render's free tier sleeps after 15 idle minutes; the 750 free hours a month are shared by all free services, so the API is kept awake only 06:30–23:30 IST (GitHub Actions). Outside those hours the first check can take ~50 s; the app wakes the API the moment it opens and says it is waking."
+  }
+ ]
+}

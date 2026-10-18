@@ -79,7 +79,15 @@ with open(RAW / "india-cyber-scam-hinglish-dataset" / "India_Cyber_Scam_Hinglish
             skel.add(s)
             hing.append((t, int(row["label"]), "synthetic_hinglish"))
 
-pool = [r for r in real_train + syn + hing if r[0].lower() not in test_texts]
+# ---- community reports (feedback loop): scams confirmed by >= 3 different Kavach users, PII-masked ----
+# produced by scripts/export_reports.py; absent until the app has real reports
+community = []
+COMMUNITY = ROOT / "data" / "community" / "reports.csv"
+if COMMUNITY.exists():
+    with open(COMMUNITY, encoding="utf-8") as f:
+        community = [(norm(row["text"]), 1, "kavach_community") for row in csv.DictReader(f) if norm(row["text"])]
+
+pool = [r for r in real_train + syn + hing + community if r[0].lower() not in test_texts]
 rng.shuffle(pool)
 n_val = round(len(pool) * 0.1)
 val, train = pool[:n_val], pool[n_val:]

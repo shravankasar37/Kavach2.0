@@ -1,0 +1,8 @@
+{
+  "name": "kavach-scenarios",
+  "private": true,
+  "type": "module",
+  "description": "End-to-end acceptance tests for the 11 Kavach scenarios",
+  "scripts": { "test": "node run.mjs" },
+  "dependencies": { "playwright-core": "1.56.1" }
+}

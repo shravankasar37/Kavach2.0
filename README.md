@@ -20,14 +20,29 @@ that a call to **1930** can freeze the money if it's made fast.
 
 ## What Kavach does
 
-1. **Detects** the scam with a fine-tuned multilingual transformer (int8 ONNX, ~20 ms per message on CPU).
-2. **Explains** it with deterministic warning signs: lookalike bank links (`sbi-kyc-verify.top` is not SBI),
-   link shorteners, OTP/PIN requests, KYC threats, fee demands, prizes, job pay, APK/remote-access apps and
-   "call this personal number", in English, Hindi and Hinglish.
-3. **Recovers**: a plan decided by code (1930 first, cybercrime.gov.in, block UPI/card, change PINs, Sanchar
-   Saathi report, RBI's 3-working-day zero-liability rule), a bank letter citing RBI circular
-   DBR.No.Leg.BC.78/09.07.005/2017-18, and an incident description for the cybercrime portal drafted by an LLM
-   **from the user's own facts only**, then fact-checked and rewritten if it added anything.
+Built so that a parent who has never copy-pasted anything can use it:
+
+| Situation | What Kavach does |
+|---|---|
+| A suspicious SMS / WhatsApp message | Long-press → **Share → Kavach** (installable app, Web Share Target), or paste it. Verdict + reasons in **English, हिंदी or मराठी**, with a **🔊 read-aloud** button |
+| A scam **screenshot** forwarded on a family group | Read on the phone with OCR (English + Hindi + Marathi); the image never leaves the device |
+| A short or unknown link | **Follows redirects** (bit.ly → real site), shows the **domain's age** (RDAP) and checks **OpenPhish + URLhaus** phishing/malware feeds |
+| "Scan this QR to get your refund" | Decodes the **QR / UPI** request and says plainly: *scanning this SENDS ₹4,999 to 98xxx@ybl*; flags a brand name hiding behind a personal UPI ID |
+| A "digital arrest" / fake-police **call** | **Call Guard**: listens on speaker (or takes a recording / WhatsApp voice note), transcribes with Whisper, catches "safe account", "don't tell your family", "video-call arrest" scripts → **"Hang up now"**, and checks the voice for AI cloning via [VaaniShield](https://github.com/shravankasar37/VaaniShield2.0) |
+| "Is this number a scammer?" | **Community reports** + lookup. Numbers/UPI IDs are stored only as salted hashes; one counts as reported only after **3 different people** report it |
+| Money already lost | A plan decided by code (**1930 first**, cybercrime.gov.in, block UPI/card, Sanchar Saathi, RBI's 3-working-day zero-liability rule), a bank letter citing RBI circular DBR.No.Leg.BC.78/09.07.005/2017-18, and an incident description drafted by an LLM **from the user's own facts only**, then fact-checked |
+| New scam scripts | Reports warn everyone instantly; [`scripts/export_reports.py`](scripts/export_reports.py) turns reports confirmed by 3+ people into training rows for the next fine-tune |
+| On Telegram | Forward a message to the bot; it answers in the message's language |
+
+Under the hood: a fine-tuned multilingual transformer (int8 ONNX, ~20 ms per message on CPU) decides; deterministic
+warning signs (lookalike bank links, OTP/PIN requests, threats, fee demands, UPI "receive" tricks, call scripts…)
+explain it and escalate only on solid evidence, with "never do this" awareness messages from banks excluded.
+
+### Scenario tests: 11/11 pass
+
+[`tests/scenarios/run.mjs`](tests/scenarios/run.mjs) drives the real app in Chrome through 11 real-life situations
+(share sheet, WhatsApp screenshots in Hindi and Marathi, QR images, uploaded and live calls, lost money, number
+lookup, cold start) and writes [`docs/scenario-report.md`](docs/scenario-report.md), including the limits of each.
 
 ```mermaid
 flowchart LR
@@ -39,7 +54,11 @@ flowchart LR
     U -->|lost money| R[Recovery plan - code]
     R --> L[Bank letter - code]
     R --> N[Incident description - LLM] --> F[Fact check] --> N
-    A[Call recording] --> VS[VaaniShield API]
+    SH[Share sheet / screenshot OCR / QR] --> M
+    K[Call on speaker] --> W[Whisper] --> M
+    K --> VS[VaaniShield voice-clone check]
+    M --> LK[Link expand + RDAP + phishing feeds] --> V
+    M --> CR[Community reports] --> V
 ```
 
 ## Results (real data only)
@@ -95,7 +114,14 @@ then `training/shrink_onnx.py`.
 
 ## Limits and roadmap
 
-The real test set is UK English SMS; Hindi and Marathi accuracy on real messages is not yet measured. Next: an
-opt-in "report this scam" button that builds a consented, PII-masked real Indian dataset; OCR for screenshots;
-and an Android share-sheet target so people can check a message without copying it. Kavach gives guidance, not
-legal or financial advice.
+- The real test set is UK English SMS. Hindi/Marathi pass all 22 author-written test messages, but accuracy on
+  **real** Indian messages will only be known from community reports.
+- Android doesn't let apps record the call line, so Call Guard hears the caller through the speaker; Whisper is
+  weaker on Marathi (audio is split into 12 s pieces because it drops the end of longer clips).
+- The free API sleeps after 15 idle minutes; it is kept awake 06:30–23:30 IST (Render's 750 free hours are shared
+  with other services). Outside those hours the first check can take ~50 s.
+- Kavach gives guidance, not legal or financial advice.
+
+```bash
+cd tests/scenarios && npm install && node run.mjs     # all 11 scenarios against local servers
+```

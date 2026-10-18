@@ -7,3 +7,18 @@ services:
     dockerContext: ./backend
     healthCheckPath: /health
     autoDeploy: true
+    envVars:
+      # community reports (optional): from your free Supabase project -> Project Settings -> API
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      # salt for hashing reported numbers; Render generates a random one
+      - key: REPORT_SALT
+        generateValue: true
+      # Telegram bot (optional): token from @BotFather
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      # the Kavach web app's address, shown by the bot for screenshots
+      - key: WEB_URL
+        sync: false

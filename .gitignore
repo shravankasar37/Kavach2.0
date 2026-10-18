@@ -12,3 +12,8 @@ training/results/
 
 # raw scraper output (contains article text); only the curated quotes are published
 data/real/candidates*.jsonl
+
+# local report database (dev)
+*.db
+# community reports exported for retraining (user content, even though masked)
+data/community/
